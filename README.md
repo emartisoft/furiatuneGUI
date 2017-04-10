@@ -9,6 +9,25 @@ FuriatuneGUI is a graphical user interface for the **furiatune\*** to run on **A
 * Amiga OS 2.X/3.X
 * furiatune (download file from http://www.kuchinka.cz/furia/ then copy it to C drawer)
 
+### Startup-Sequence
+If RIGHT mouse button is held upon boot then furiatuneGUI starts. How to do?
+* Copy furiatune and furiatuneGUI to C drawer
+* Add these lines to the beginning of the startup-sequence file (furiatuneGUI/Startup-Sequence/Startup-Sequence.txt)
+
+~~~~ bash
+C:GetMouseInput LOCAL
+
+IF $MouseInput EQ 2
+  Unset MouseInput
+  IF EXISTS C:furiatuneGUI
+	C:furiatuneGUI
+  EndIF
+  EndCLI >NIL:
+EndIF
+
+Unset MouseInput
+~~~~
+
 ### ScreenShots
 
 ![icon](https://github.com/emartisoft/furiatuneGUI/blob/master/screenshots/icon.png?raw=true)
