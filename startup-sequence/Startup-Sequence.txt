@@ -1,0 +1,17 @@
+;HOW TO:
+;Copy furiatune and furiatuneGUI to C drawer
+;Add these lines to the beginning of the startup-sequence file
+;
+;If RIGHT mouse button is held upon boot then furiatuneGUI starts.
+;
+C:GetMouseInput LOCAL
+
+IF $MouseInput EQ 2
+  Unset MouseInput
+  IF EXISTS C:furiatuneGUI
+	C:furiatuneGUI
+  EndIF
+  EndCLI >NIL:
+EndIF
+
+Unset MouseInput
