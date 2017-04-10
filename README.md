@@ -9,4 +9,16 @@ FuriatuneGUI is a graphical user interface for the **furiatune\*** to run on **A
 * Amiga OS 2.X/3.X
 * furiatune (download file from http://www.kuchinka.cz/furia/ then copy it to C drawer)
 
+### ScreenShots
 
+![icon](https://github.com/emartisoft/furiatuneGUI/blob/master/screenshots/icon.png?raw=true)
+<br><br>
+![main](https://github.com/emartisoft/furiatuneGUI/blob/master/screenshots/main.png?raw=true)
+<br>furiatuneGUI Main Window<br><br>
+![maprom](https://github.com/emartisoft/furiatuneGUI/blob/master/screenshots/maprom.png?raw=true)
+<br>furiatuneGUI MapROM File Window<br><br>
+![menu](https://github.com/emartisoft/furiatuneGUI/blob/master/screenshots/menu.png?raw=true)
+<br>furiatuneGUI Menus<br><br>
+![startup1](https://github.com/emartisoft/furiatuneGUI/blob/master/screenshots/startup1.png?raw=true)
+<br><br>
+![startup2](https://github.com/emartisoft/furiatuneGUI/blob/master/screenshots/startup2.png?raw=true)
