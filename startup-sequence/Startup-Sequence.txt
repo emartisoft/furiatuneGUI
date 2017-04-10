@@ -1,5 +1,5 @@
 ;HOW TO:
-;Copy furiatune and furiatuneGUI to C drawer
+;Copy furiatune, GetMouseInput and furiatuneGUI to C drawer
 ;Add these lines to the beginning of the startup-sequence file
 ;
 ;If RIGHT mouse button is held upon boot then furiatuneGUI starts.
