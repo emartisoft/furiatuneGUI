@@ -12,7 +12,7 @@ FuriatuneGUI is a graphical user interface for the **furiatune\*** to run on **A
 ### Startup-Sequence
 If RIGHT mouse button is held upon boot then furiatuneGUI starts. How to do?
 * Copy furiatune and furiatuneGUI to C drawer
-* Add these lines to the beginning of the startup-sequence file (furiatuneGUI/Startup-Sequence/Startup-Sequence.txt)
+* Add these lines to the beginning of the S:Startup-sequence file (furiatuneGUI/Startup-Sequence/Startup-Sequence.txt)
 
 ~~~~ bash
 C:GetMouseInput LOCAL
