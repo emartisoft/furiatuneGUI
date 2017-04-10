@@ -27,6 +27,8 @@ EndIF
 
 Unset MouseInput
 ~~~~
+### Video
+Please, Click to watch the video [ https://youtu.be/qF_fdg1YnS8 ]
 
 ### ScreenShots
 
