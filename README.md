@@ -5,5 +5,5 @@ FuriatuneGUI is a graphical user interface for the **furiatune\*** to run on **A
 
 ### Requirements
 * Amiga 600
-* Furia Expansion Board (Furia accelerator CPU 68EC020/33 MHz, FPU 68882, 9.5MB of Fast RAM
+* Furia Expansion Board (Furia accelerator CPU 68EC020/33 MHz, FPU 68882, 9.5MB of Fast RAM)
 * Amiga OS 2.X/3.X
