@@ -8,7 +8,8 @@ FuriatuneGUI is a graphical user interface for the **furiatune\*** to run on **A
 * Furia Expansion Board (Furia accelerator CPU 68EC020/33 MHz, FPU 68882, 9.5MB of Fast RAM)
 * Amiga OS 2.X/3.X
 * furiatune (download file from http://www.kuchinka.cz/furia/ then copy it to C drawer)
-
+### Boot Diskette
+In **boot-diskette-adf** folder, you may download **furiatuneGUI_boot_diskette.adf** image file then can write image file to disk
 ### Startup-Sequence
 If RIGHT mouse button is held upon boot then furiatuneGUI starts. How to do?
 * Copy furiatune and furiatuneGUI to C drawer
