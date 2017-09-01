@@ -46,7 +46,8 @@ const char *stringSrc = "     Hi and loves from\
  TURKEY! Coded by emarti, Murat OZDEMIR. Please, do not forget to visit furiatuneGUI\
  web site [https://github.com/emartisoft].\
  If you contact to me, send email to dtemarti@gmail.com\
- (C) 2017 Version 1.0   ";
+ (C) 2017 Version 1.1   ";
+
 
 void ControlStatus(void)
 {
@@ -142,24 +143,24 @@ void SelectMapromFile(void)
     ActivateWindow(fMapromWindow);
     MoveWindowInFrontOf(fMapromWindow, fwindow);
     while(m_done==0)
-		{
-				Wait(1L << fMapromWindow->UserPort->mp_SigBit);
-				m_imsg=GT_GetIMsg(fMapromWindow->UserPort);
-				while (m_imsg != NULL )
-					{
-					m_clas=m_imsg->Class;
-					m_code=m_imsg->Code;
-					m_pgsel=(struct Gadget *)m_imsg->IAddress; /* Only reference if it is a gadget message */
-					GT_ReplyIMsg(m_imsg);
-					ProcessWindowfMapromWindow(m_clas, m_code, m_pgsel);
-					m_imsg=GT_GetIMsg(fMapromWindow->UserPort);
-					}
-				}
+        {
+                Wait(1L << fMapromWindow->UserPort->mp_SigBit);
+                m_imsg=GT_GetIMsg(fMapromWindow->UserPort);
+                while (m_imsg != NULL )
+                    {
+                    m_clas=m_imsg->Class;
+                    m_code=m_imsg->Code;
+                    m_pgsel=(struct Gadget *)m_imsg->IAddress; /* Only reference if it is a gadget message */
+                    GT_ReplyIMsg(m_imsg);
+                    ProcessWindowfMapromWindow(m_clas, m_code, m_pgsel);
+                    m_imsg=GT_GetIMsg(fMapromWindow->UserPort);
+                    }
+                }
 
-			CloseWindowfMapromWindow();
-	}
-	else
-		printf("Cannot open window.\n");
+            CloseWindowfMapromWindow();
+    }
+    else
+        printf("Cannot open window.\n");
 }
 
 void ProcessMenuIDCMPfMenu( UWORD MenuNumber)
@@ -167,155 +168,155 @@ void ProcessMenuIDCMPfMenu( UWORD MenuNumber)
   UWORD MenuNum;
   UWORD ItemNumber;
   UWORD SubNumber;
-  int Done=0;						/* Set Done to 1 to forget rest of next selects. */
+  int Done=0;                        /* Set Done to 1 to forget rest of next selects. */
   struct MenuItem *item;
   while ((MenuNumber != MENUNULL) && (Done == 0))
-	{
-  	item = ItemAddress( fMenu, MenuNumber);
-  	MenuNum = MENUNUM(MenuNumber);
-  	ItemNumber = ITEMNUM(MenuNumber);
-  	SubNumber = SUBNUM(MenuNumber);
-  	switch ( MenuNum )
-		{
-  		case NOMENU :
-  			/* No Menu Selected. */
-  			break;
-  		case FuriatuneGUIMenu :
-  			switch ( ItemNumber )
-				{
-  				case NOITEM :
-  					/* No Item selcted. */
-  					break;
-  				case FuriatuneGUIMenuReboot :
-  					/* Item Text : Reboot Amiga */
+    {
+      item = ItemAddress( fMenu, MenuNumber);
+      MenuNum = MENUNUM(MenuNumber);
+      ItemNumber = ITEMNUM(MenuNumber);
+      SubNumber = SUBNUM(MenuNumber);
+      switch ( MenuNum )
+        {
+          case NOMENU :
+              /* No Menu Selected. */
+              break;
+          case FuriatuneGUIMenu :
+              switch ( ItemNumber )
+                {
+                  case NOITEM :
+                      /* No Item selcted. */
+                      break;
+                  case FuriatuneGUIMenuReboot :
+                      /* Item Text : Reboot Amiga */
             xReboot();
-  					break;
-  				case FuriatuneGUIMenuClose :
-  					/* Item Text : Close */
+                      break;
+                  case FuriatuneGUIMenuClose :
+                      /* Item Text : Close */
             done = 1;
-  					break;
-				}
-  			break;
-  		case ConfigMenu :
-  			switch ( ItemNumber )
-				{
-  				case NOITEM :
-  					/* No Item selcted. */
-  					break;
-  				case fMenuDefault :
-  					/* Item Text : Reset settings to defaults */
+                      break;
+                }
+              break;
+          case ConfigMenu :
+              switch ( ItemNumber )
+                {
+                  case NOITEM :
+                      /* No Item selcted. */
+                      break;
+                  case fMenuDefault :
+                      /* Item Text : Reset settings to defaults */
             xDefault();
-  					break;
-  				case fMenuFpuon :
-  					/* Item Text : FPU -> on */
+                      break;
+                  case fMenuFpuon :
+                      /* Item Text : FPU -> on */
             xFpuOn();
             _fpu = FALSE;
             UpdateToggleButton(4, _fpu);
-  					break;
-  				case fMenuFpuoff :
-  					/* Item Text : FPU -> off */
+                      break;
+                  case fMenuFpuoff :
+                      /* Item Text : FPU -> off */
             xFpuOff();
             _fpu = TRUE;
             UpdateToggleButton(4, _fpu);
-  					break;
-  				case fMenuCacheon :
-  					/* Item Text : CPU Cache -> on */
+                      break;
+                  case fMenuCacheon :
+                      /* Item Text : CPU Cache -> on */
             xCacheOn();
             _cache = FALSE;
             UpdateToggleButton(5, _cache);
-  					break;
-  				case fMenuCacheoff :
-  					/* Item Text : CPU Cache -> off */
+                      break;
+                  case fMenuCacheoff :
+                      /* Item Text : CPU Cache -> off */
             xCacheOff();
             _cache = TRUE;
             UpdateToggleButton(5, _cache);
-  					break;
-  				case fMenuIdeon :
-  					/* Item Text : IDE Speedup -> on */
+                      break;
+                  case fMenuIdeon :
+                      /* Item Text : IDE Speedup -> on */
             xIdeOn();
             _ide = FALSE;
             UpdateToggleButton(6, _ide);
-  					break;
-  				case fMenuIdeoff :
-  					/* Item Text : IDE Speedup -> off */
+                      break;
+                  case fMenuIdeoff :
+                      /* Item Text : IDE Speedup -> off */
             xIdeOff();
             _ide = TRUE;
             UpdateToggleButton(6, _ide);
-  					break;
-  				case fMenuShadowrom :
-  					/* Item Text : ShadowROM -> on */
+                      break;
+                  case fMenuShadowrom :
+                      /* Item Text : ShadowROM -> on */
             xShadow();
             _shadow = FALSE;
             _map = TRUE;
             UpdateToggleButton(7, _shadow);
             UpdateToggleButton(8, _map);
-  					break;
-  				case fMenuMaprom :
-  					/* Item Text : Select MapROM file */
+                      break;
+                  case fMenuMaprom :
+                      /* Item Text : Select MapROM file */
             SelectMapromFile();
-  					break;
-  				case fMenuBoardrom :
-  					/* Item Text : Disables Shadow/MapROM */
+                      break;
+                  case fMenuBoardrom :
+                      /* Item Text : Disables Shadow/MapROM */
             xBoard();
             _shadow = TRUE;
             _map = TRUE;
             UpdateToggleButton(7, _shadow); // Shadowrom togglebutton is off
             UpdateToggleButton(8, _map); // maprom togglebutton is off
-  					break;
-  				case fMenuAddmem :
-  					/* Item Text : Add 1.5 MB of memory */
+                      break;
+                  case fMenuAddmem :
+                      /* Item Text : Add 1.5 MB of memory */
             xAddMem();
-  					break;
-				}
-  			break;
-  		case HelpMenu :
-  			switch ( ItemNumber )
-				{
-  				case NOITEM :
-  					/* No Item selcted. */
-  					break;
-  				case HelpMenuAbout :
-  					/* Item Text : About */
+                      break;
+                }
+              break;
+          case HelpMenu :
+              switch ( ItemNumber )
+                {
+                  case NOITEM :
+                      /* No Item selcted. */
+                      break;
+                  case HelpMenuAbout :
+                      /* Item Text : About */
             xAbout();
-  					break;
-				}
-  			break;
-		}
-  	MenuNumber = item->NextSelect;
-	}
+                      break;
+                }
+              break;
+        }
+      MenuNumber = item->NextSelect;
+    }
 }
 
 void ProcessWindowfwindow(LONG Class, UWORD Code, APTR IAddress)
 {
   struct Gadget *gad;
   switch (Class)
-	{
+    {
     case IDCMP_GADGETUP :
-  		/* Gadget message, gadget = gad. */
-  		gad = (struct Gadget *)IAddress;
-  		switch (gad->GadgetID)
-  		{
-    			case bAbout :
-    				/* Button pressed  , Text of gadget : About */
-    				xAbout();
-    				break;
+          /* Gadget message, gadget = gad. */
+          gad = (struct Gadget *)IAddress;
+          switch (gad->GadgetID)
+          {
+                case bAbout :
+                    /* Button pressed  , Text of gadget : About */
+                    xAbout();
+                    break;
 
-    			case bReboot :
-    				/* Button pressed  , Text of gadget : Reboot */
+                case bReboot :
+                    /* Button pressed  , Text of gadget : Reboot */
             xReboot();
-    				break;
+                    break;
 
-    			case bDefaults :
-    				/* Button pressed  , Text of gadget : Defaults */
+                case bDefaults :
+                    /* Button pressed  , Text of gadget : Defaults */
             xDefault();
-    				break;
+                    break;
 
-    			case bAddMegs :
-    				/* Button pressed  , Text of gadget : Add 1.5 Megs */
+                case bAddMegs :
+                    /* Button pressed  , Text of gadget : Add 1.5 Megs */
             xAddMem();
-    				break;
+                    break;
 
-    			case tFPU :
+                case tFPU :
             /* FPU togglebutton */
             _fpu = !_fpu;
             if (!_fpu)
@@ -326,9 +327,9 @@ void ProcessWindowfwindow(LONG Class, UWORD Code, APTR IAddress)
             {
               xFpuOff();
             }
-    				break;
+                    break;
 
-    			case tCache :
+                case tCache :
             /* Cache togglebutton */
             _cache = !_cache;
             if (!_cache)
@@ -339,9 +340,9 @@ void ProcessWindowfwindow(LONG Class, UWORD Code, APTR IAddress)
             {
               xCacheOff();
             }
-    				break;
+                    break;
 
-    			case tIDE :
+                case tIDE :
             /* IDESpeedup togglebutton */
             _ide = !_ide;
             if (!_ide)
@@ -352,9 +353,9 @@ void ProcessWindowfwindow(LONG Class, UWORD Code, APTR IAddress)
             {
               xIdeOff();
             }
-    				break;
+                    break;
 
-    			case tShadow :
+                case tShadow :
             /* ShadowROM togglebutton */
             _shadow = !_shadow;
             if (!_shadow)
@@ -367,7 +368,7 @@ void ProcessWindowfwindow(LONG Class, UWORD Code, APTR IAddress)
             {
               xBoard();
             }
-    				break;
+                    break;
 
           case tMap :
           /* MapROM togglebutton */
@@ -383,8 +384,8 @@ void ProcessWindowfwindow(LONG Class, UWORD Code, APTR IAddress)
           }
             break;
 
-  			}
-  		  break;
+              }
+            break;
 
     case IDCMP_CLOSEWINDOW :
         /* CloseWindow Now */
@@ -402,24 +403,24 @@ void ProcessWindowfwindow(LONG Class, UWORD Code, APTR IAddress)
 
     case IDCMP_INTUITICKS :
         /* Timing message. */
-      	if (((micros / 100000) % 2) == 0)
+          if (((micros / 100000) % 2) == 0)
         {
           strcpy(caption, "FuriatuneGUI - ");
           mid( stringSrc, strstart % (strlen(stringSrc)), CAPLEN, stringDst, sizeof(stringDst));
           strcat(caption, stringDst);
           strstart++;
-      		SetWindowTitles(fwindow, caption, strScreen);
+              SetWindowTitles(fwindow, caption, strScreen);
         }
         break;
 
     case IDCMP_MENUPICK :
-    		/* Menu Selected */
+            /* Menu Selected */
         ProcessMenuIDCMPfMenu(Code);
-    		break;
+            break;
 
     case IDCMP_MENUHELP :
-    		break;
-	}
+            break;
+    }
 }
 
 void ProcessWindowfMapromWindow( LONG Class, UWORD Code, APTR IAddress )
@@ -427,17 +428,17 @@ void ProcessWindowfMapromWindow( LONG Class, UWORD Code, APTR IAddress )
 STRPTR mapromfile;
 struct Gadget *gad;
 switch ( Class )
-	{
-	case IDCMP_GADGETUP :
-		/* Gadget message, gadget = gad. */
-		gad = (struct Gadget *)IAddress;
-		switch ( gad->GadgetID )
-			{
-			case tMaprom :
-				/* String entered  , Text of gadget :  */
-				break;
-			case bOkay :
-				/* Button pressed  , Text of gadget : OK */
+    {
+    case IDCMP_GADGETUP :
+        /* Gadget message, gadget = gad. */
+        gad = (struct Gadget *)IAddress;
+        switch ( gad->GadgetID )
+            {
+            case tMaprom :
+                /* String entered  , Text of gadget :  */
+                break;
+            case bOkay :
+                /* Button pressed  , Text of gadget : OK */
         mapromfile = ((struct StringInfo *)fMapromWindowGadgets[1]->SpecialInfo)->Buffer;
         if (fileExist(mapromfile))
         {
@@ -454,28 +455,28 @@ switch ( Class )
           printf("MapROM file not found: '%s'\n", mapromfile);
         }
 
-				break;
-			case bCancel :
-				/* Button pressed  , Text of gadget : Cancel */
+                break;
+            case bCancel :
+                /* Button pressed  , Text of gadget : Cancel */
         UpdateToggleButton(8, _map);
         m_done = 1;
-				break;
-			}
-		break;
-	case IDCMP_CLOSEWINDOW :
-		/* CloseWindow Now */
+                break;
+            }
+        break;
+    case IDCMP_CLOSEWINDOW :
+        /* CloseWindow Now */
     UpdateToggleButton(8, _map);
     m_done = 1;
-		break;
-	case IDCMP_REFRESHWINDOW :
-		GT_BeginRefresh( fMapromWindow);
-		/* Refresh window. */
-	  RendWindowfMapromWindow( fMapromWindow, fMapromWindowVisualInfo );
-		GT_EndRefresh( fMapromWindow, TRUE);
-	  GT_RefreshWindow( fMapromWindow, NULL);
-	  RefreshGList( fMapromWindowGList, fMapromWindow, NULL, ~0);
-		break;
-	}
+        break;
+    case IDCMP_REFRESHWINDOW :
+        GT_BeginRefresh( fMapromWindow);
+        /* Refresh window. */
+      RendWindowfMapromWindow( fMapromWindow, fMapromWindowVisualInfo );
+        GT_EndRefresh( fMapromWindow, TRUE);
+      GT_RefreshWindow( fMapromWindow, NULL);
+      RefreshGList( fMapromWindowGList, fMapromWindow, NULL, ~0);
+        break;
+    }
 }
 
 int main(void)
@@ -485,11 +486,14 @@ int main(void)
   struct Gadget *pgsel;
   struct IntuiMessage *imsg;
 
+
+
+
   if (OpenLibs()==0)
-	{
-	   if (MakeImages()==0)
-		 {
-       printf("***** FuriatuneGUI by emarti, Murat OZDEMIR *****\n");
+    {
+       if (MakeImages()==0)
+         {
+       printf("***** FuriatuneGUI V1.1 by emarti, Murat OZDEMIR *****\n");
        if (!fileExist("SYS:C/furiatune"))
        {
           printf("FuriatuneGUI needs furiatune file.\n");
@@ -507,37 +511,38 @@ int main(void)
           }
           else
           {
-        		if (OpenWindowfwindow()==0)
-        		{
-          			ControlStatus();
-          			while(done==0)
-          			{
-          				Wait(1L << fwindow->UserPort->mp_SigBit);
-          				imsg=GT_GetIMsg(fwindow->UserPort);
-          				while (imsg != NULL )
-          				{
-          					clas=imsg->Class;
-          					code=imsg->Code;
-          					//seconds=imsg->Seconds; /* Seconds */
+                if (OpenWindowfwindow()==0)
+                {
+                      ControlStatus();
+                      while(done==0)
+                      {
+                          Wait(1L << fwindow->UserPort->mp_SigBit);
+                          imsg=GT_GetIMsg(fwindow->UserPort);
+                          while (imsg != NULL )
+                          {
+                              clas=imsg->Class;
+                              code=imsg->Code;
+                              //seconds=imsg->Seconds; /* Seconds */
                     micros = imsg->Micros;   /* Micros */
-          					pgsel=(struct Gadget *)imsg->IAddress;
-          					GT_ReplyIMsg(imsg);
-          					ProcessWindowfwindow(clas, code, pgsel);
-          					imsg=GT_GetIMsg(fwindow->UserPort);
-          				}
-          			}
+                              pgsel=(struct Gadget *)imsg->IAddress;
+                              GT_ReplyIMsg(imsg);
+                              ProcessWindowfwindow(clas, code, pgsel);
+                              imsg=GT_GetIMsg(fwindow->UserPort);
+                          }
+                      }
                 CloseWindowfwindow();
-        		}
-        		else
-        			printf("Cannot open window.\n");
-        		FreeImages();
+                }
+                else
+                    printf("Cannot open window.\n");
+                FreeImages();
           }
         }
-		}
-	  else
-		  printf("Cannot make images.\n");
-	  CloseLibs();
-	}
-else
-	printf("Cannot open libraries.\n");
-}
+        }
+      else
+          printf("Cannot make images.\n");
+      CloseLibs();
+    }
+ else
+    printf("Cannot open libraries.\n");
+ }
+

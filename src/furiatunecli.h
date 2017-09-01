@@ -41,8 +41,8 @@ Modified: 10 Apr 2017
 ULONG micros;  /* Micros */
 int statusresult, i;
 
-#define PATH_MAX	64
-#define CAPLEN  32
+#define PATH_MAX    64
+#define CAPLEN    32
 BPTR fp;
 UBYTE path[PATH_MAX];
 UBYTE result[PATH_MAX];
@@ -54,7 +54,7 @@ struct EasyStruct aboutreq =
    sizeof(struct EasyStruct),
    0,
    "About",
-   "Furiatune GUI 1.0 (C) 2017\nCoded by emarti, Murat OZDEMIR\n\nWeb: https://github.com/emartisoft\nLoves from Turkey!",
+   "Furiatune GUI 1.1 (C) 2017\nCoded by emarti, Murat OZDEMIR\n\nWeb: https://github.com/emartisoft\nLoves from Turkey!\nStay with the Amiga!",
    "Ok"
 };
 
@@ -74,16 +74,16 @@ void mid(const char *src, size_t start, size_t length, char *dst, size_t dstlen)
 // furiatune outputs
 char *results[10] =
 {
-	"no furia expansion board installed",
-	"Cache is on",
-	"Cache is off",
-	"FPU is on",
-	"FPU is off",
-	"IDESpeedup is on",
-	"IDESpeedup is off",
-	"MapROM is active",
-	"ROM mapping is inactive",
-	"ShadowROM is active"
+    "no furia expansion board installed",
+    "Cache is on",
+    "Cache is off",
+    "FPU is on",
+    "FPU is off",
+    "IDESpeedup is on",
+    "IDESpeedup is off",
+    "MapROM is active",
+    "ROM mapping is inactive",
+    "ShadowROM is active"
 };
 
 BOOL fileExist(STRPTR filePath)
@@ -117,33 +117,33 @@ ROM mapping is inactive
 */
 void furiatunestatus(void)
 {
-	statusresult=0;
-  Execute("SYS:C/furiatune status >SYS:C/furiatune.log", NULL, NULL);
-	fp = Open("SYS:C/furiatune.log", MODE_OLDFILE);
-	strcpy(result,"");
-	if(fp)
-	{
-		while(FGets(fp, path, PATH_MAX))
-		{
-			strcat(result, path);
-		}
-		Close(fp);
-	}
+    statusresult=0;
+    Execute("SYS:C/furiatune status >RAM:furiatune.log", NULL, NULL);
+    fp = Open("RAM:furiatune.log", MODE_OLDFILE);
+    strcpy(result,"");
+    if(fp)
+    {
+        while(FGets(fp, path, PATH_MAX))
+        {
+            strcat(result, path);
+        }
+        Close(fp);
+    }
 
-	for(i=1;i<10;i++)
-	{
-		if (strstr(result, results[i]) != NULL)
-		{
-				switch (i) {
-					case 0: statusresult = 0; break; // no furia
-					case 1: statusresult +=1; break; // Cache on
-					case 3: statusresult +=2; break; // fpu on
-					case 5: statusresult +=4; break; // ide on
-					case 7: statusresult +=16; break; // maprom active
-					case 9: statusresult +=8; break; // shadowrom active
-				}
-		}
-	}
+    for(i=1;i<10;i++)
+    {
+        if (strstr(result, results[i]) != NULL)
+        {
+                switch (i) {
+                    case 0: statusresult = 0; break; // no furia
+                    case 1: statusresult +=1; break; // Cache on
+                    case 3: statusresult +=2; break; // fpu on
+                    case 5: statusresult +=4; break; // ide on
+                    case 7: statusresult +=16; break; // maprom active
+                    case 9: statusresult +=8; break; // shadowrom active
+                }
+        }
+    }
 }
 
 void RunFuriatune(char parameter[PATH_MAX])
@@ -205,12 +205,14 @@ void xIdeOn(void)
 {
   printf("Enabled IDE Speed up function\n");
   RunFuriatune("ide on");
+  Execute("SYS:C/furiatune status >SYS:Prefs/Env-Archive/furiatunegui.prefs",NULL,NULL);
 }
 
 void xIdeOff(void)
 {
   printf("Disabled IDE Speed up function\n");
   RunFuriatune("ide off");
+  Execute("SYS:C/furiatune status >SYS:Prefs/Env-Archive/furiatunegui.prefs",NULL,NULL);
 }
 
 void xShadow(void)
@@ -230,7 +232,9 @@ void xMap(STRPTR mapromfile)
   STRPTR cmd = "maprom ";
   printf("Enabled MapROM function\n");
   strcat(cmd, mapromfile);
+  xBoard();
   RunFuriatune(cmd);
+  xReboot();
 }
 
 #endif
