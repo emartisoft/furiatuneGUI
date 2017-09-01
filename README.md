@@ -25,7 +25,7 @@ If RIGHT mouse button is held upon boot then furiatuneGUI starts. How to do?
 * Copy furiatune, GetMouseInput and furiatuneSET to **C** drawer
 * Copy furiatuneGUI to **SYS:System** drawer
 * Add the following lines to the beginning of the **S:Startup-sequence file** (furiatuneGUI/Startup-Sequence/Startup-Sequence.txt)
-### S:Startup-Sequence Setting
+### S:Startup-Sequence Settings
 ~~~~ bash
 ;Remember settings
 SYS:C/furiatuneSET
