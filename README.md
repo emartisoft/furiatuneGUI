@@ -10,7 +10,8 @@ V1.1:
 * It remembers setting (IDE on/off), Added furiatuneSET file
 * Updated command lines to the beginning of the S:Startup-sequence file
 	
-V1.0: First release
+V1.0: 
+* First release
 
 ### Requirements
 * Amiga 600
