@@ -5,10 +5,11 @@ FuriatuneGUI is a graphical user interface for the **furiatune\*** to run on **A
 
 ### Version Hi(story)
 V1.1:
-	* Bugs Fixed (MAPROM function)
-	* More faster
-	* It remembers setting (IDE on/off), Added furiatuneSET file
-	* Updated command lines to the beginning of the S:Startup-sequence file
+* Bugs Fixed (MAPROM function)
+* More faster
+* It remembers setting (IDE on/off), Added furiatuneSET file
+* Updated command lines to the beginning of the S:Startup-sequence file
+	
 V1.0: First release
 
 ### Requirements
