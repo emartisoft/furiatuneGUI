@@ -7,7 +7,7 @@ FuriatuneGUI is a graphical user interface for the **furiatune\*** to run on **A
 V1.1:
 * Bugs Fixed (MAPROM function)
 * More faster
-* It remembers setting (IDE on/off), Added *furiatuneSET* file
+* It remembers setting (IDE on/off, Shadowrom, Boardrom), Added *furiatuneSET* file
 * Updated command lines to the beginning of the **S:Startup-sequence file**
 	
 V1.0: 
