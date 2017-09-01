@@ -3,7 +3,7 @@ FuriatuneGUI is a graphical user interface for the **furiatune\*** to run on **A
 
 (*) furiatune is a simple tool, that handles all the functions of the FuriaEC020 accelerator card. More info at http://www.kuchinka.cz/furia/
 
-### Version Hi(story)
+### Version (Hi)story
 V1.1:
 * Bugs Fixed (MAPROM function)
 * More faster
