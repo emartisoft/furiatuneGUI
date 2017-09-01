@@ -74,5 +74,14 @@ int main(void)
        RunFuriatune("ide off");
     }
     
+    if (strstr(result, results[9]) != NULL)
+    {
+       RunFuriatune("shadowrom");
+    }
+    else
+    {
+       RunFuriatune("boardrom");
+    }
+    
     return 0;
 }
