@@ -221,12 +221,14 @@ void xShadow(void)
 {
   printf("Enabled ShadowROM 32 bit access\n");
   RunFuriatune("shadowrom");
+  Execute("SYS:C/furiatune status >SYS:Prefs/Env-Archive/furiatunegui.prefs",NULL,NULL);
 }
 
 void xBoard(void)
 {
   printf("Disabled ShadowROM/MapROM function\n");
   RunFuriatune("boardrom");
+  Execute("SYS:C/furiatune status >SYS:Prefs/Env-Archive/furiatunegui.prefs",NULL,NULL);
 }
 
 void xMap(STRPTR mapromfile)
