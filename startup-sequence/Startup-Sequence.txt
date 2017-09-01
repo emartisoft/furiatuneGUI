@@ -1,17 +1,21 @@
 ;HOW TO:
-;Copy furiatune, GetMouseInput and furiatuneGUI to C drawer
+;Copy furiatune, furiatuneSET and GetMouseInput to C drawer
+;Copy furiatuneGUI to SYS:System drawer
 ;Add these lines to the beginning of the startup-sequence file
 ;
 ;If RIGHT mouse button is held upon boot then furiatuneGUI starts.
 ;
-C:GetMouseInput LOCAL
 
+;Remember settings
+SYS:C/furiatuneSET
+
+C:GetMouseInput LOCAL
 IF $MouseInput EQ 2
   Unset MouseInput
-  IF EXISTS C:furiatuneGUI
-	C:furiatuneGUI
+  IF EXISTS SYS:System/furiatuneGUI
+	SYS:System/furiatuneGUI
+	echo "Rebooting your Amiga ..."
+	SYS:C/furiatune reboot
   EndIF
-  EndCLI >NIL:
 EndIF
-
 Unset MouseInput
