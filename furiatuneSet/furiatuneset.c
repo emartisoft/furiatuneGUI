@@ -49,31 +49,30 @@ void RunFuriatune(char parameter[PATH_MAX])
 
 int main(void)
 {
+    fp = Open("SYS:Prefs/Env-Archive/furiatunegui.prefs",MODE_OLDFILE);
+    strcpy(result,"");
+    if (fp)
+    {
+        //printf("File in operation \n");
+        while(FGets(fp, path, PATH_MAX))
+        {
+            strcat(result, path);
+        }
+        Close(fp);
+    }
+   // else
+   // {
+   //     printf("Prefs file not found for furiatuneGUI\n");
+   // }
 
-            fp = Open("SYS:Prefs/Env-Archive/furiatunegui.prefs",MODE_OLDFILE);
-            strcpy(result,"");
-            if (fp)
-            {
-                //printf("File in operation \n");
-                while(FGets(fp, path, PATH_MAX))
-                {
-                    strcat(result, path);
-                }
-                Close(fp);
-            }
-           // else
-           // {
-           //     printf("Prefs file not found for furiatuneGUI\n");
-           // }
-
-            if (strstr(result, results[5]) != NULL)
-            {
-               RunFuriatune("ide on");
-            }
-            else
-            {
-               RunFuriatune("ide off");
-            }
+    if (strstr(result, results[5]) != NULL)
+    {
+       RunFuriatune("ide on");
+    }
+    else
+    {
+       RunFuriatune("ide off");
+    }
     
     return 0;
 }
