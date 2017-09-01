@@ -1,4 +1,4 @@
-;HOW TO:
+;HOW TO DO:
 ;Copy furiatune, furiatuneSET and GetMouseInput to C drawer
 ;Copy furiatuneGUI to SYS:System drawer
 ;Add these lines to the beginning of the startup-sequence file
