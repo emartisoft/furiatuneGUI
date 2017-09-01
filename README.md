@@ -7,8 +7,8 @@ FuriatuneGUI is a graphical user interface for the **furiatune\*** to run on **A
 V1.1:
 * Bugs Fixed (MAPROM function)
 * More faster
-* It remembers setting (IDE on/off), Added furiatuneSET file
-* Updated command lines to the beginning of the S:Startup-sequence file
+* It remembers setting (IDE on/off), Added *furiatuneSET* file
+* Updated command lines to the beginning of the **S:Startup-sequence file**
 	
 V1.0: 
 * First release
@@ -22,11 +22,11 @@ V1.0:
 In **boot-diskette-adf** folder, you may download **furiatuneGUI_boot_diskette_VX.X.adf** image file then can write image file to disk
 ### How to Install
 If RIGHT mouse button is held upon boot then furiatuneGUI starts. How to do?
-* Copy furiatune, GetMouseInput and furiatuneSET to **C** drawer
-* Copy furiatuneGUI to **SYS:System** drawer
+* Copy *furiatune*, *GetMouseInput* and *furiatuneSET* to **C** drawer
+* Copy *furiatuneGUI* to **SYS:System** drawer
 * Add the following lines to the beginning of the **S:Startup-sequence file** (furiatuneGUI/Startup-Sequence/Startup-Sequence.txt)
 
-In addition you may click icon to execute furiatuneGUI in **SYS:System** drawer.
+In addition you may click icon to execute *furiatuneGUI* in **SYS:System** drawer.
 ### S:Startup-Sequence Settings
 ~~~~ bash
 ;Remember settings
