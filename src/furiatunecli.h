@@ -16,6 +16,7 @@ You should have received a copy of the GNU General Public License
 along with FuriatuneGUI.  If not, see <http://www.gnu.org/licenses/>.
 
 Version: 1.0 02042017
+Version: 1.1 01092017
 Target OS: AmigaOS2.X/3.X
 
 FuriatuneGUI is a graphical user interface for the furiatune*
@@ -32,6 +33,7 @@ email: dtemarti@gmail.com
 
 Created : 02 Apr 2017
 Modified: 10 Apr 2017
+Modified: 01 Sep 2017
 */
 
 #ifndef FURIATUNECLI_H
