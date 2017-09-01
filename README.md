@@ -18,7 +18,7 @@ V1.0: First release
 * Amiga OS 2.X/3.X
 * furiatune (download file from http://www.kuchinka.cz/furia/ then copy it to C drawer)
 ### Boot Diskette
-In **boot-diskette-adf** folder, you may download **furiatuneGUI_boot_diskette.adf** image file then can write image file to disk
+In **boot-diskette-adf** folder, you may download **furiatuneGUI_boot_diskette_VX.X.adf** image file then can write image file to disk
 ### Startup-Sequence
 If RIGHT mouse button is held upon boot then furiatuneGUI starts. How to do?
 * Copy furiatune, GetMouseInput and furiatuneSET to C drawer
