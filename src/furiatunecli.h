@@ -33,7 +33,7 @@ email: dtemarti@gmail.com
 
 Created : 02 Apr 2017
 Modified: 10 Apr 2017
-Modified: 01 Sep 2017
+Modified: 01-04 Sep 2017
 */
 
 #ifndef FURIATUNECLI_H
@@ -154,6 +154,7 @@ void RunFuriatune(char parameter[PATH_MAX])
   strcat(furiatunePATH, parameter);
   //printf("%s\n", parameter);
   Execute(furiatunePATH, NULL, NULL);
+  Execute("SYS:C/furiatune status >SYS:Prefs/Env-Archive/furiatunegui.prefs",NULL,NULL);
 }
 
 void xAbout(void)
@@ -207,38 +208,43 @@ void xIdeOn(void)
 {
   printf("Enabled IDE Speed up function\n");
   RunFuriatune("ide on");
-  Execute("SYS:C/furiatune status >SYS:Prefs/Env-Archive/furiatunegui.prefs",NULL,NULL);
 }
 
 void xIdeOff(void)
 {
   printf("Disabled IDE Speed up function\n");
   RunFuriatune("ide off");
-  Execute("SYS:C/furiatune status >SYS:Prefs/Env-Archive/furiatunegui.prefs",NULL,NULL);
 }
 
 void xShadow(void)
 {
+  xBoard();
   printf("Enabled ShadowROM 32 bit access\n");
   RunFuriatune("shadowrom");
-  Execute("SYS:C/furiatune status >SYS:Prefs/Env-Archive/furiatunegui.prefs",NULL,NULL);
 }
 
 void xBoard(void)
 {
-  printf("Disabled ShadowROM/MapROM function\n");
+  printf("If MapROM/ShadowROM is active, may be reboot\n");
   RunFuriatune("boardrom");
-  Execute("SYS:C/furiatune status >SYS:Prefs/Env-Archive/furiatunegui.prefs",NULL,NULL);
+  printf("Disabled ShadowROM/MapROM function\n");
 }
 
 void xMap(STRPTR mapromfile)
 {
   STRPTR cmd = "maprom ";
-  printf("Enabled MapROM function\n");
+   
+  fp = Open("SYS:Prefs/Env-Archive/maprom.prefs", MODE_NEWFILE);
+  if (fp)
+  {
+     FPuts(fp, mapromfile);
+     Close(fp);
+  }
+  
   strcat(cmd, mapromfile);
   xBoard();
   RunFuriatune(cmd);
-  xReboot();
+  printf("Enabled MapROM function but need reboot your Amiga\n");
 }
 
 #endif
