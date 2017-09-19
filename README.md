@@ -30,9 +30,9 @@ V1.1: https://youtu.be/zzO39Zrf94M
 <br><br>
 ![startup2](https://github.com/emartisoft/furiatuneGUI/blob/master/screenshots/startup2.png?raw=true)
 <br><br>
-![welcome](https://github.com/emartisoft/furiatuneGUI/blob/master/screenshots/welcome.png?raw=true)
-<br><br>
 ![install_drawer](https://github.com/emartisoft/furiatuneGUI/blob/master/screenshots/install_drawer.png?raw=true)
+<br><br>
+![welcome](https://github.com/emartisoft/furiatuneGUI/blob/master/screenshots/welcome.png?raw=true)
 <br><br>
 ![installed](https://github.com/emartisoft/furiatuneGUI/blob/master/screenshots/installed.png?raw=true)
 <br><br>
