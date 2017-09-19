@@ -1,0 +1,78 @@
+;-----------------------------------------------
+; furiatuneGUI Setup Script
+; This file is part of FuriatuneGUI.
+; FuriatuneGUI by emarti, Murat Özdemir (C) 2017
+; Version: 1.0
+; Date: 09 September 2017
+;-----------------------------------------------
+
+echo "*e[>1m*e[32;41m*e[0;0H*e[J"
+prompt "*n*e[>1m*e[33;41m*e[1m%N/%R.*e[30;41m%S>*e[0m*e[32;41m "
+alias CLS "echo *"*E[0;0H*E[J*""
+
+echo ""
+echo " Welcome to Setup"
+echo " ----------------"
+echo " FuriatuneGUI is a graphical user interface for the"
+echo " furiatune to run on Amiga 600 with Furia Expansion"
+echo " Board only.  The  interface  is  very  simple  and"
+echo " user-friendly, it offers easy access to documented"
+echo " furiatune parameters without the need for command-"
+echo " line usage."
+echo ""
+search >NIL: SYS:S/Startup-Sequence "furiatune "
+If not WARN
+    echo " WARNING: Please, remove furiatune command-lines from"
+    echo "          Startup-Sequence file firstly before setup."
+    echo ""
+Else
+    echo " Do you want to install it?"
+    echo " Type 'Y'es to continue."
+    echo " Type 'N'o to exit the installation."
+    ask  " ? "
+
+    If WARN
+        cls
+        echo ""
+        echo " Copying Files"
+        echo " -------------"
+        echo ""
+        copy furiatuneGUI.info SYS:System/ ALL QUIET
+        copy furiatuneGUI SYS:System/ ALL QUIET
+        echo " Copied furiatuneGUI."
+        copy furiatune SYS:C/ ALL QUIET
+        echo " Copied furiatune to SYS:C drawer."
+        copy furiatuneSet SYS:C/ ALL QUIET
+        echo " Copied furiatuneSet to SYS:C drawer."
+        copy furiatuneMapROM SYS:C/ ALL QUIET
+        echo " Copied furiatuneMapROM to SYS:C drawer."
+		copy GetMouseInput SYS:C/ ALL QUIET
+        echo " Copied GetMouseInput to SYS:C drawer."
+        search >NIL: SYS:S/Startup-Sequence "furiatuneSet"
+        If WARN
+            copy SYS:S/Startup-Sequence SYS:S/Startup-Sequence.backup
+            furiatuneSet2SS
+        EndIf
+        echo " Added command-lines to the beginning"
+        echo " of the S:Startup-Sequence file."
+        echo ""
+        ask  " Please, press ENTER to continue."
+        cls
+        echo ""
+        echo " Congratulations"
+        echo " ---------------"
+        echo " You have successfully installed furiatuneGUI 1.2 in SYS:System drawer."
+        echo ""
+        echo " Enjoy it! Stay with the Amiga!"
+    Else
+        cls
+        echo ""
+        echo " furiatuneGUI Setup"
+        echo " ------------------"
+        echo ""
+        echo " The installation was canceled."
+    EndIf
+EndIf
+echo ""
+ask  " Please, press ENTER to exit."
+EndShell

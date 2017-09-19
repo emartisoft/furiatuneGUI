@@ -1,0 +1,105 @@
+;-----------------------------------------------
+; This file is part of FuriatuneGUI.
+; FuriatuneGUI by emarti, Murat Ozdemir (C) 2017
+; Version: 1.0
+; Date: 09 September 2017
+;-----------------------------------------------
+
+;Variables
+;---------
+Set furiatune SYS:C/furiatune
+Set furiatunelog RAM:furiatune.log
+Set guiPrefs SYS:Prefs/Env-Archive/furiatuneGUI.prefs
+Set RomUpdate 1
+
+If Exists $furiatune
+    $furiatune >$furiatunelog status
+    search >NIL: $furiatunelog "no furia"
+    ;Do you have furia exp. board?
+    ;-----------------------------
+    If WARN
+      ;If RIGHT mouse button is held upon boot
+      ;then furiatuneGUI starts.
+      C:GetMouseInput LOCAL
+      If $MouseInput EQ 2
+         Unset MouseInput
+         If EXISTS SYS:System/furiatuneGUI
+            SYS:System/furiatuneGUI
+            echo "Rebooting your Amiga ..."
+            SYS:C/furiatune reboot
+         EndIf
+      EndIf
+      ;If LEFT mouse button is held upon boot
+      ;then reset settings to defaults.
+      If $MouseInput EQ 1
+         UnSet MouseInput
+         delete $guiPrefs >NIL:
+         echo "Resetted settings to defaults for Furia Expansion Board"
+         ask "Press ENTER to reboot your Amiga"
+         echo "Rebooting your Amiga ..."
+         SYS:C/furiatune default reboot >NIL:
+      EndIf
+      Unset MouseInput
+
+        If Exists $guiPrefs
+
+            ;IDESpeedup
+            ;----------
+            search >NIL: $guiPrefs "IDESpeedup is on"
+            If Not WARN
+                $furiatune ide on >NIL:
+            Else
+                $furiatune ide off >NIL:
+            EndIf
+
+            ;Maprom is active
+            ;----------------
+            search >NIL: $furiatunelog "MapROM is active"
+            If WARN
+                search >NIL: $guiPrefs "MapROM is active"
+                If Not WARN
+                    $furiatune boardrom >NIL:
+                    SYS:C/furiatuneMapROM
+                EndIf
+            Else
+                Set RomUpdate 0
+            EndIf
+
+            ;Shadowrom is active
+            ;-------------------
+           ; search >NIL: $furiatunelog "ShadowROM is active"
+           ; If WARN
+                search >NIL: $guiPrefs "ShadowROM is active"
+                If Not WARN
+                    $furiatune boardrom >NIL:
+                    $furiatune shadowrom >NIL:
+                EndIf
+           ; EndIf
+
+            ;ROM mapping is inactive
+            ;-----------------------
+           ; search >NIL: $furiatunelog "ROM mapping is inactive"
+           ; If WARN
+                search >NIL: $guiPrefs "ROM mapping is inactive"
+                If Not WARN
+                    $furiatune boardrom >NIL:
+                EndIf
+           ; EndIf
+        EndIf
+    EndIf
+    delete $furiatunelog >NIL:
+EndIf
+
+;Rom Update?
+;-----------
+If $RomUpdate EQ 0
+   ;If MapROM is active
+   SYS:C/SetPatch NOROMUPDATE QUIET
+Else
+   ;=============================================
+   ;If MapROM is NOT active then
+   ;move LoadModule & SetPatch command-lines
+   ;from your Startup-Sequence to here.
+   ;=============================================
+   SYS:C/SetPatch NOROMUPDATE QUIET
+EndIf
