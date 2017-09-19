@@ -15,25 +15,11 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with FuriatuneGUI.  If not, see <http://www.gnu.org/licenses/>.
 
-Version: 1.0 02042017
-Version: 1.1 01092017
 Target OS: AmigaOS2.X/3.X
-
-FuriatuneGUI is a graphical user interface for the furiatune*
-to run on Amiga 600 with Furia Expansion Board only.
-The interface is very simple and user-friendly, it offers easy
-access to documented furiatune* parameters without the need
-for command-line usage.
-
-(*) furiatune is a simple tool, that handles all the functions of the
-FuriaEC020 accelerator card. More info at http://www.kuchinka.cz/furia/
 
 Web: https://github.com/emartisoft
 email: dtemarti@gmail.com
 
-Created : 02 Apr 2017
-Modified: 10 Apr 2017
-Modified: 01 Sep 2017
 */
 
 #include <exec/types.h>
@@ -104,7 +90,7 @@ struct Gadget *fwindowGadgets[9];
 UBYTE fwindowFirstRun = 0;
 
 STRPTR strTitle = "FuriatuneGUI";
-STRPTR strScreen = "FuriatuneGUI V1.1 - emarti, Murat OZDEMIR (C) 2017";
+STRPTR strScreen = "FuriatuneGUI V1.2 - emarti, Murat OZDEMIR (C) 2017";
 
 UWORD fwindowGadgetTypes[] =
 {
@@ -143,7 +129,7 @@ ULONG fMapromWindowGadgetTags[] =
 {
     (GTTX_Text), (ULONG)"Enter MapROM File Path",
     (TAG_END),
-    (GTST_String), (ULONG)"SYS:ROM/Kick.rom",
+    (GTST_String), (ULONG)"DEVS:Kickstarts/?.rom",
     (TAG_END),
 };
 

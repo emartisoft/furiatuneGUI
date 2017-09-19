@@ -15,25 +15,11 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with FuriatuneGUI.  If not, see <http://www.gnu.org/licenses/>.
 
-Version: 1.0 02042017
-Version: 1.1 01092017
 Target OS: AmigaOS2.X/3.X
-
-FuriatuneGUI is a graphical user interface for the furiatune*
-to run on Amiga 600 with Furia Expansion Board only.
-The interface is very simple and user-friendly, it offers easy
-access to documented furiatune* parameters without the need
-for command-line usage.
-
-(*) furiatune is a simple tool, that handles all the functions of the
-FuriaEC020 accelerator card. More info at http://www.kuchinka.cz/furia/
 
 Web: https://github.com/emartisoft
 email: dtemarti@gmail.com
 
-Created : 02 Apr 2017
-Modified: 10 Apr 2017
-Modified: 01-04 Sep 2017
 */
 
 #ifndef FURIATUNECLI_H
@@ -50,13 +36,30 @@ UBYTE path[PATH_MAX];
 UBYTE result[PATH_MAX];
 char furiatunePATH[PATH_MAX];
 
+//furiatunegui.prefs
+STRPTR pIdeSpeed;
+STRPTR pROM;
+
+BOOL Changed; // Is maprom or shadowrom settings changed?
+BOOL Default; // Is settings default?
+
 // About
 struct EasyStruct aboutreq =
 {
    sizeof(struct EasyStruct),
    0,
    "About",
-   "Furiatune GUI 1.1 (C) 2017\nCoded by emarti, Murat OZDEMIR\n\nWeb: https://github.com/emartisoft\nLoves from Turkey!\nStay with the Amiga!",
+   "Furiatune GUI 1.2 (C) 2017\nCoded by emarti, Murat OZDEMIR\n\nWeb: https://github.com/emartisoft\nLoves from Turkey!\nStay with the Amiga!",
+   "Ok"
+};
+
+// Warning Gayle Chip
+struct EasyStruct WarningGayle =
+{
+   sizeof(struct EasyStruct),
+   0,
+   "Warning",
+   "If MapROM is ON and Amiga 600 Board has GAYLE-02 chip,\nIDE SpeedUp must be OFF. Otherwise, the system may be freeze.",
    "Ok"
 };
 
@@ -86,6 +89,14 @@ char *results[10] =
     "MapROM is active",
     "ROM mapping is inactive",
     "ShadowROM is active"
+};
+
+// Settings are changed and needs to reboot
+char *flashMessage[3] =
+{
+	"   Settings are changed    ",
+	"    and needs to reboot    ",
+	"  CLICK TO REBOOT BUTTON   "
 };
 
 BOOL fileExist(STRPTR filePath)
@@ -148,13 +159,25 @@ void furiatunestatus(void)
     }
 }
 
+void SavePrefs(void)
+{
+  Changed=TRUE;
+  Default=FALSE;
+	fp = Open("SYS:Prefs/Env-Archive/furiatunegui.prefs", MODE_NEWFILE);
+	if (fp)
+	{
+		FPuts(fp, pIdeSpeed);
+		FPuts(fp, "\n");
+		FPuts(fp, pROM);
+		Close(fp);
+	}
+}
+
 void RunFuriatune(char parameter[PATH_MAX])
 {
   strcpy(furiatunePATH, "SYS:C/furiatune >NIL: ");
   strcat(furiatunePATH, parameter);
-  //printf("%s\n", parameter);
   Execute(furiatunePATH, NULL, NULL);
-  Execute("SYS:C/furiatune status >SYS:Prefs/Env-Archive/furiatunegui.prefs",NULL,NULL);
 }
 
 void xAbout(void)
@@ -162,89 +185,94 @@ void xAbout(void)
   EasyRequest(NULL, &aboutreq, NULL, NULL);
 }
 
-void xDefault(void)
-{
-  printf("Resetted settings to defaults (reboots if needed)\n");
-  RunFuriatune("default");
-}
-
 void xReboot(void)
 {
-  printf("Rebooting your Amiga...\n");
+  //printf("Rebooting your Amiga...\n");
+  if (Changed)
+  {
+  	RunFuriatune("boardrom");
+  }
+
+  if (Default)
+  {
+  	RunFuriatune("default");
+  }
+
   RunFuriatune("reboot");
 }
 
 void xAddMem(void)
 {
-  printf("Added 1.5 MB of memory\n");
-  RunFuriatune("addmem");
+  //printf("Added 1.5 MB of memory\n");
+  if (!(fileExist("RAM:addmem")))
+  {
+  	RunFuriatune("addmem");
+  	Execute("echo >RAM:addmem",NULL,NULL);
+  }
 }
 
 void xFpuOn(void)
 {
-  printf("Enabled onboard FPU (reboots if needed)\n");
+  //printf("Enabled onboard FPU (reboots if needed)\n");
   RunFuriatune("fpu on");
 }
 
 void xFpuOff(void)
 {
-  printf("Disabled onboard FPU (reboots if needed)\n");
+  //printf("Disabled onboard FPU (reboots if needed)\n");
   RunFuriatune("fpu off");
 }
 
 void xCacheOn(void)
 {
-  printf("Enabled CPU Cache\n");
+  //printf("Enabled CPU Cache\n");
   RunFuriatune("cache on");
 }
 
 void xCacheOff(void)
 {
-  printf("Disabled CPU Cache\n");
+  //printf("Disabled CPU Cache\n");
   RunFuriatune("cache off");
 }
 
 void xIdeOn(void)
 {
-  printf("Enabled IDE Speed up function\n");
-  RunFuriatune("ide on");
+  //printf("Enabled IDE Speed up function but need reboot your Amiga\n");
+  SavePrefs();
 }
 
 void xIdeOff(void)
 {
-  printf("Disabled IDE Speed up function\n");
-  RunFuriatune("ide off");
+  //printf("Disabled IDE Speed up function but need reboot your Amiga\n");
+  SavePrefs();
 }
 
 void xShadow(void)
 {
-  xBoard();
-  printf("Enabled ShadowROM 32 bit access\n");
-  RunFuriatune("shadowrom");
+  //printf("Enabled ShadowROM 32 bit access but need reboot your Amiga\n\n");
+  SavePrefs();
 }
 
 void xBoard(void)
 {
-  printf("If MapROM/ShadowROM is active, may be reboot\n");
-  RunFuriatune("boardrom");
-  printf("Disabled ShadowROM/MapROM function\n");
+  //printf("If MapROM/ShadowROM is active, may be reboot\n");
+  //printf("Disabled ShadowROM/MapROM function\n");
+  SavePrefs();
 }
 
 void xMap(STRPTR mapromfile)
 {
-  STRPTR cmd = "maprom ";
-   
-  fp = Open("SYS:Prefs/Env-Archive/maprom.prefs", MODE_NEWFILE);
+  fp = Open("SYS:C/furiatuneMapROM", MODE_NEWFILE);
+
   if (fp)
   {
-     FPuts(fp, mapromfile);
-     Close(fp);
+    FPuts(fp, "If Exists ");
+    FPuts(fp, mapromfile);
+    FPuts(fp, "\n   SYS:C/furiatune maprom ");
+    FPuts(fp, mapromfile);
+    FPuts(fp, " reboot >NIL:\nEndIf");
+    Close(fp);
   }
-  
-  strcat(cmd, mapromfile);
-  xBoard();
-  RunFuriatune(cmd);
-  printf("Enabled MapROM function but need reboot your Amiga\n");
 }
 
 #endif

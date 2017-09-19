@@ -1,6 +1,6 @@
 #
 # FuriatuneGUI by emarti
-# Version  : 1.1 02042017
+# Version  : 1.2 11092017
 # Target OS: Amiga OS2.X/3.X
 # Compiler : GCC
 #
