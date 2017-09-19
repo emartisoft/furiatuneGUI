@@ -13,6 +13,7 @@ FuriatuneGUI is a graphical user interface for the **furiatune\*** to run on **A
 Please, Click to watch the video:
 
 V1.0: https://youtu.be/qF_fdg1YnS8
+
 V1.1: https://youtu.be/zzO39Zrf94M
 
 ### ScreenShots
