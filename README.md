@@ -3,51 +3,16 @@ FuriatuneGUI is a graphical user interface for the **furiatune\*** to run on **A
 
 (*) furiatune is a simple tool, that handles all the functions of the FuriaEC020 accelerator card. More info at http://www.kuchinka.cz/furia/
 
-### Version (Hi)story
-V1.1:
-* Bugs Fixed (MAPROM function)
-* More faster
-* It remembers setting (IDE on/off, Shadowrom, Boardrom), Added *furiatuneSET* file
-* Updated command lines to the beginning of the **S:Startup-sequence file**
-	
-V1.0: 
-* First release
-
 ### Requirements
 * Amiga 600
 * Furia Expansion Board (Furia accelerator CPU 68EC020/33 MHz, FPU 68882, 9.5MB of Fast RAM)
 * Amiga OS 2.X/3.X
 * furiatune (download file from http://www.kuchinka.cz/furia/ then copy it to C drawer)
-### Boot Diskette
-In **boot-diskette-adf** folder, you may download **furiatuneGUI_boot_diskette_VX.X.adf** image file then can write image file to disk
-### How to Install
-If RIGHT mouse button is held upon boot then furiatuneGUI starts. How to do?
-* Copy *furiatune*, *GetMouseInput* and *furiatuneSET* to **C** drawer
-* Copy *furiatuneGUI* to **SYS:System** drawer
-* Add the following lines to the beginning of the **S:Startup-sequence file** (furiatuneGUI/Startup-Sequence/Startup-Sequence.txt)
 
-In addition you may click icon to execute *furiatuneGUI* in **SYS:System** drawer.
-### S:Startup-Sequence Settings
-~~~~ bash
-;Remember settings
-SYS:C/furiatuneSET
-
-C:GetMouseInput LOCAL
-IF $MouseInput EQ 2
-  Unset MouseInput
-  IF EXISTS SYS:System/furiatuneGUI
-	SYS:System/furiatuneGUI
-	echo "Rebooting your Amiga ..."
-	SYS:C/furiatune reboot
-  EndIF
-EndIF
-Unset MouseInput
-~~~~
 ### Video
 Please, Click to watch the video:
 
 V1.0: https://youtu.be/qF_fdg1YnS8
-
 V1.1: https://youtu.be/zzO39Zrf94M
 
 ### ScreenShots
