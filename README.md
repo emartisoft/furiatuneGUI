@@ -9,7 +9,7 @@ FuriatuneGUI is a graphical user interface for the **furiatune\*** to run on **A
 * Amiga OS 2.X/3.X
 * furiatune (download file from http://www.kuchinka.cz/furia/ then copy it to C drawer)
 
-### Video
+### Videos
 Please, Click to watch the video:
 
 V1.0: https://youtu.be/qF_fdg1YnS8
